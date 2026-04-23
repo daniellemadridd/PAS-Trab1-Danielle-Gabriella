@@ -1,6 +1,6 @@
 package br.pucrs.daniellemadrid.demo;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Contrato {
     private int id, periodo;
