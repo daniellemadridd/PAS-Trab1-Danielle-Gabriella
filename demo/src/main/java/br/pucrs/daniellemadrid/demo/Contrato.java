@@ -35,4 +35,11 @@ public class Contrato {
     public void setData(Date data) {
         this.data = data;
     }
+
+    public double calcularTotal(Categoria categoria, Uso uso, Jogo jogo) {
+
+        int minutosJogados = uso.getHorarioFim() - uso.getHorarioInicio();
+
+        return categoria.getValorMininmo() + (minutosJogados * jogo.getValorMinuto());
+    }
 }
