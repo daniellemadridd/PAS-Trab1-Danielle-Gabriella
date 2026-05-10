@@ -72,51 +72,30 @@ private Date nascimento;
         List<Jogo> jogos,
         List<Categoria> categorias) {
 
-    double totalCobranca = 0;
+        double totalCobranca = 0;
 
-    for (Contrato contrato : contratos) {
+        for (Contrato contrato : contratos) {
+            if (contrato.getCliente() == null || !contrato.getCliente().getCpf().equals(this.cpf)) {
+                continue;
+            }
 
-        Uso uso = null;
-        Jogo jogo = null;
-        Categoria categoria = null;
+            Uso uso = null;
+            for (Uso u : usos) {
+                if (u.getNumero() == contrato.getId()) {
+                    uso = u;
+                    break;
+                }
+            }
 
-        for (Uso u : usos) {
-            if (u.getNumero() == contrato.getId()) {
-                uso = u;
-                break;
+            if (uso != null && contrato.getJogo() != null) {
+                totalCobranca += contrato.calcularTotal(uso);
             }
         }
 
-        for (Jogo j : jogos) {
-            if (j.getCodigo() == contrato.getId()) {
-                jogo = j;
-                break;
-            }
+        if (totalCobranca > 500) {
+            totalCobranca -= totalCobranca * 0.03;
         }
 
-        for (Categoria c : categorias) {
-            if (c.getNum() == contrato.getId()) {
-                categoria = c;
-                break;
-            }
-        }
-
-        if (uso != null &&
-            jogo != null &&
-            categoria != null) {
-
-            totalCobranca += contrato.calcularTotal(
-                    categoria,
-                    uso,
-                    jogo
-            );
-        }
+        return totalCobranca;
     }
-
-    if (totalCobranca > 500) {
-        totalCobranca -= totalCobranca * 0.03;
-    }
-
-    return totalCobranca;
-}
 }

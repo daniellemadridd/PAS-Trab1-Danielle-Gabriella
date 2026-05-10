@@ -4,12 +4,16 @@ import java.util.Date;
 
 public class Contrato {
     private int id, periodo;
+    private Jogo jogo;
+    private Cliente cliente;
     private Date data;
-
-    public Contrato(int id, int periodo, Date data) {
+    
+    public Contrato(int id, int periodo, Date data, Jogo jogo, Cliente cliente) {
         this.id = id;
         this.periodo = periodo;
         this.data = data;
+        this.jogo = jogo;
+        this.cliente = cliente;
     }
 
     public int getId() {
@@ -36,10 +40,26 @@ public class Contrato {
         this.data = data;
     }
 
-    public double calcularTotal(Categoria categoria, Uso uso, Jogo jogo) {
+    public Jogo getJogo() {
+        return this.jogo;
+    }
 
+    public void setJogo(Jogo jogo) {
+        this.jogo = jogo;
+    }
+
+    public Cliente getCliente() {
+        return this.cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public double calcularTotal(Uso uso) {
         int minutosJogados = uso.getHorarioFim() - uso.getHorarioInicio();
+        Categoria categoriaDoJogo = this.jogo.getCategoria();
 
-        return categoria.getValorMininmo() + (minutosJogados * jogo.getValorMinuto());
+        return categoriaDoJogo.getValorMininmo() + (minutosJogados * this.jogo.getValorMinuto());
     }
 }
