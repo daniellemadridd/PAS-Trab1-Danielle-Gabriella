@@ -3,9 +3,11 @@ package br.pucrs.daniellemadrid.demo;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -189,4 +191,39 @@ public double consultarTotalCliente(
 
     return cliente.calcularTotalCobranca(contratos, usos, jogos, categorias);
 }
+
+@PutMapping("/cadastro/atualizajogo/{codigo}/situacao/{status}")
+public Jogo atualizarSituacaoJogo(
+        @PathVariable int codigo,
+        @PathVariable String status) {
+
+    for (Jogo jogo : jogos) {
+
+        if (jogo.getCodigo() == codigo) {
+
+            jogo.setSituacao(status);
+
+            return jogo;
+        }
+    }
+
+    return null;
+}
+
+@DeleteMapping("/cadastro/cancelacontrato")
+public boolean cancelarContrato(@RequestBody int id) {
+
+    for (Contrato contrato : contratos) {
+
+        if (contrato.getId() == id) {
+
+            contrato.setAtivo(false);
+
+            return true;
+        }
+    }
+
+    return false;
+}
+
 }

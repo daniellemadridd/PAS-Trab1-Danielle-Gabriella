@@ -8,6 +8,7 @@ public class Jogo {
     private String nome;
     private double valorMinuto;
     private Categoria categoria;
+    private String situacao;
 
     public Jogo(int codigo, int ano, String nome, double valorMinuto, Categoria categoria) {
         this.codigo = codigo;
@@ -15,6 +16,7 @@ public class Jogo {
         this.nome = nome;
         this.valorMinuto = valorMinuto;
         this.categoria = categoria;
+        this.situacao = "disponivel";
     }
 
     public int getCodigo() {
@@ -57,6 +59,14 @@ public class Jogo {
         this.categoria = categoria;
     }
 
+    public String getSituacao() {
+    return this.situacao;
+    }
+
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
+    }
+    
     public String getSituacao(List<Contrato> todosContratos) {
         int anoAtual = Calendar.getInstance().get(Calendar.YEAR);
         Date dataUltimoContrato = null;

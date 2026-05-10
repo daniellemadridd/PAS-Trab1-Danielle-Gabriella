@@ -7,13 +7,15 @@ public class Contrato {
     private Jogo jogo;
     private Cliente cliente;
     private Date data;
-    
+    private boolean ativo;
+
     public Contrato(int id, int periodo, Date data, Jogo jogo, Cliente cliente) {
         this.id = id;
         this.periodo = periodo;
         this.data = data;
         this.jogo = jogo;
         this.cliente = cliente;
+        this.ativo = true;
     }
 
     public int getId() {
@@ -54,6 +56,14 @@ public class Contrato {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public boolean isAtivo() {
+    return this.ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 
     public double calcularTotal(Uso uso) {
