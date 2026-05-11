@@ -75,7 +75,7 @@ public class Controller{
   public List<Jogo> getJogoPorSituacao(@PathVariable String situacao){
     List<Jogo> jogoSituacao = new ArrayList<>();
     for(Jogo jogo : jogos){
-      if(jogo.getSituacao(contratos).equals(situacao)){
+            if(jogo.getSituacao().equals(situacao)){
         jogoSituacao.add(jogo);
       }
     }
